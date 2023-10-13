@@ -11,22 +11,32 @@
  */
 class Solution {
 public:
+    void inOrderTr(TreeNode* root,     vector<int>&inOrder){
+        if(root==nullptr){
+            return;
+        }
+        inOrderTr(root->left,inOrder);
+        inOrder.push_back(root->val);
+        inOrderTr(root->right,inOrder);
+    }
+    
+    int findK(vector<int>arr,int k){
+        int i =0;
+        while(k!=0){
+            i++;
+            k--;
+            
+        }
+        return arr[i-1];
+    }
     int kthSmallest(TreeNode* root, int &k) {
      
-      if(root==nullptr){
-          return -1;
-      }
-        int leftAns = kthSmallest(root->left,k);
-        if(leftAns!=-1)
-            return leftAns;
+    vector<int>inOrder;
+    inOrderTr(root,inOrder);
+    int ans = findK(inOrder,k);
+
         
-        k--;
-        if(k==0){
-            return root->val;
-        }
-        int rightAns = kthSmallest(root->right,k);
-        return rightAns;
+        return ans;
     
-        
     }
 };
