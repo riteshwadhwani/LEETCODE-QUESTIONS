@@ -12,25 +12,23 @@
 class Solution {
 public:
     
-    void find(vector<int>&arr,TreeNode * root, int low,int high){
+    void find(TreeNode * root, int low,int high,int&sum){
         if(root==nullptr){
             return;
         }
-        find(arr,root->left,low,high);
+        find(root->left,low,high,sum);
         if(root->val>=low && root->val<=high){
-            arr.push_back(root->val);
+           sum = sum + root->val;
         }
-        find(arr,root->right,low,high);
+        find(root->right,low,high,sum);
         
         
     }
     int rangeSumBST(TreeNode* root, int low, int high) {
-        vector<int>arr;
-        find(arr,root,low,high);
         int sum =0;
-        for(int i =0;i<arr.size();i++){
-            sum = sum + arr[i];
-        }
+        find(root,low,high,sum);
+        
+      
         return sum;
         
     }
