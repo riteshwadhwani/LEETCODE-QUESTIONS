@@ -23,13 +23,27 @@ public:
             return false;
         }
     }
+
+    void pushInOrder(vector<int>&arr, TreeNode* root){
+        if(root==nullptr){
+            return ;
+        }
+        pushInOrder(arr,root->left);
+        arr.push_back(root->val);
+        pushInOrder(arr,root->right);
+
+
+    }
     bool isValidBST(TreeNode* root) {
-        long long int lb = -4294967294;
-        long long int ub = 4294967294;
-        
-        bool ans = solve(root, lb,ub);
-        return ans;
-        
+     vector<int>inOrder;
+     pushInOrder(inOrder,root);
+     for(int i =0;i<inOrder.size()-1;i++){
+         if(inOrder[i+1]<=inOrder[i]){
+             return false;
+         }
+     }
+     return true;
+
         
     }
 };
